@@ -27,8 +27,6 @@
 ## 🛠️ Công nghệ sử dụng
 
 * Flutter (Mobile App)
-* NodeJS (Backend API)
-* MySQL (Database)
 
 ---
 
