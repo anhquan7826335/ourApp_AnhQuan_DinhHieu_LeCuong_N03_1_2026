@@ -1,33 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'models/user.dart';
+import 'models/list_user.dart';
 // Đối tượng và biến mô tả
-class User {
-  final int id;
-  String name;
-  String email;
-  String password;
-
-  User({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.password,
-  });
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'email': email,
-        'password': password,
-      };
-
-  factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json['id'],
-        name: json['name'],
-        email: json['email'],
-        password: json['password'],
-      );
-}
 
 class Income {
   final int id;
@@ -125,6 +99,53 @@ class ExpenseCategory {
       );
 }
 
+// Generics class với 1 biến obj 
+class GenericPrinter<T> {
+  final T obj;
+  GenericPrinter(this.obj);
+
+  void printFormatted() {
+    if (obj is List) {
+      _formatAndPrintList(obj as List);
+    } else {
+      print(obj.toString());
+    }
+  }
+
+  void _formatAndPrintList(List list) {
+    final buffer = StringBuffer('[');
+
+    if (list.isEmpty) {
+      buffer.write(']');
+      print(buffer.toString());
+      return;
+    }
+
+    buffer.write('\n');
+    for (var i = 0; i < list.length; i++) {
+      final item = list[i];
+      final isLast = i == list.length - 1;
+      final comma = isLast ? '' : ',';
+
+      if (item is Map) {
+        buffer.write('  ${_formatMapItem(item)}$comma\n');
+      } else {
+        buffer.write('  ${item.toString()}$comma\n');
+      }
+    }
+    buffer.write(']');
+    print(buffer.toString());
+  }
+
+  String _formatMapItem(Map item) {
+    if (item.isEmpty) return '{}';
+    final entries = item.entries.map((e) {
+      return "'${e.key}': '${e.value}'";
+    }).join(', ');
+    return '{$entries}';
+  }
+}
+
 // Dữ liệu mẫu
 List<User> users = [
   User(id: 1, name: 'Quan', email: 'quan@gmail.com', password: '12345'),
@@ -153,6 +174,43 @@ List<Expense> expenses = [
 ];
 
 void main() {
+
+  var students = [
+    {'studentID': '23010580', 'fullname': 'Lê Anh Quân'},
+    {'studentID': '23010827', 'fullname': 'Nguyễn Đình Hiếu'},
+    {'studentID': '23010224', 'fullname': 'Lê Mạnh Cường'},
+  ];
+
+  final printer = GenericPrinter<List<Map<String, String>>>(students);
+  printer.printFormatted();
+  
+  final initialUsers = [
+    User(id: 1, name: 'Quan', email: 'quan@gmail.com', password: '12345'),
+    User(id: 2, name: 'Hieu', email: 'hieu@gmail.com', password: '12345'),
+  ];
+
+  final listRepo = UserList(initialUsers);
+
+  // Create
+  final created = listRepo.create(User(id: 3, name: 'Cuong', email: 'cuong@gmail.com', password: '12345'));
+  print('Created: $created'); // true
+
+  // Read all
+  final all = listRepo.readAll();
+  print('All users: ${all.length}');
+
+  // Read by id
+  final u2 = listRepo.readById(2);
+  print('User 2: ${u2?.name}');
+
+  // Update
+  final updated = listRepo.updateById(2, name: 'Hieu Updated', email: 'hieu_new@gmail.com');
+  print('Updated: $updated');
+
+  // Delete (tùy chọn)
+  final deleted = listRepo.deleteById(1);
+  print('Deleted id 1: $deleted');
+  
   runApp(const MyApp());
 }
 
