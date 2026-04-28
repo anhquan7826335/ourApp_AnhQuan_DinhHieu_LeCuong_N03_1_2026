@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'models/user.dart';
-import 'models/list_user.dart';
+import 'entity/user.dart';
+import 'controller/list_user.dart';
+import 'front/contact_page.dart';
+import 'front/home_page.dart';
+import 'front/device_page.dart';
+import 'front/finance_page.dart';
 // Đối tượng và biến mô tả
 
 class Income {
@@ -241,6 +245,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int counter = 0;
+  int _selectedIndex = 0;
+
+  final List<Widget> _pages = const [
+    HomePage(),
+    FinancePage(),
+    ContactPage(),
+    DevicePage(),
+  ];
 
   double get totalIncome => incomes.fold(0.0, (sum, income) => sum + income.amount);
   double get totalExpense => expenses.fold(0.0, (sum, expense) => sum + expense.amount);
@@ -251,58 +263,41 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: ListView(
-          children: [
-            const Text('Users:', style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 6),
-            ...users.map((u) => Text('• ${u.name} — ${u.email}')).toList(),
-            const Divider(),
-
-            const Text('Income Categories:', style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 6),
-            ...incomeCategories.map((c) => Text('• ${c.name}')).toList(),
-            const Divider(),
-
-            const Text('Expense Categories:', style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 6),
-            ...expenseCategories.map((c) => Text('• ${c.name}')).toList(),
-            const Divider(),
-
-            Text('Incomes (Tổng: ${totalIncome.toStringAsFixed(0)}):', style: const TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 6),
-            ...incomes.map((i) => Text('• [${i.id}] ${i.description} — ${i.amount.toStringAsFixed(0)} — ${i.date.toLocal().toString().split(".")[0]}')).toList(),
-            const Divider(),
-
-            Text('Expenses (Tổng: ${totalExpense.toStringAsFixed(0)}):', style: const TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 6),
-            ...expenses.map((e) => Text('• [${e.id}] ${e.description} — ${e.amount.toStringAsFixed(0)} — ${e.date.toLocal().toString().split(".")[0]}')).toList(),
-            const SizedBox(height: 24),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Thêm dữ liệu',
-        onPressed: () {
-          setState(() {
-            final newId = expenses.isEmpty ? 1 : expenses.last.id + 1;
-            expenses.add(Expense(
-              id: newId,
-              description: 'Chi thử $newId',
-              amount: 5000.0 + newId,
-              date: DateTime.now(),
-            ));
-          });
-        },
-        child: const Icon(Icons.add),
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: _onItemTapped,
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.home_outlined),
+            selectedIcon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.account_balance_wallet_outlined),
+            selectedIcon: Icon(Icons.account_balance_wallet),
+            label: 'Thu Chi',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.contact_phone_outlined),
+            selectedIcon: Icon(Icons.contact_phone),
+            label: 'Contact',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.devices_outlined),
+            selectedIcon: Icon(Icons.devices),
+            label: 'Device',
+          ),
+        ],
       ),
     );
   }
