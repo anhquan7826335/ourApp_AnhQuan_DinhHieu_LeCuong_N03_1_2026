@@ -1,16 +1,19 @@
-
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class AboutPage extends StatelessWidget {
+  const AboutPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, dynamic>> members = [
+      {'name': 'Nguyen Thi Van', 'age': 20},
+      {'name': 'Tran Van Minh', 'age': 10},
+      {'name': 'Ngo Thi Lan', 'age': 25},
+    ];
     return Scaffold(
       body: Column(
         children: [
-          // Header
-            Padding(
+          Padding(
               padding: const EdgeInsets.only(
                 top: 20,
                 left: 16,
@@ -39,23 +42,18 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-          // Body
           Expanded(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 16),
-                  const Text(
-                    'Chào mừng đến với ứng dụng quản lý thu chi của nhóm chúng tôi!',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+            child: Container(
+              child: ListView(
+                children: members
+                    .map((c) => ListTile(
+                          title: Text(c['name']),
+                          subtitle: Text('Tuổi: 	${c['age']}'),
+                        ))
+                    .toList(),
               ),
             ),
           ),
-          // Footer
           Container(
             width: double.infinity,
             color: Colors.grey[200],
@@ -71,12 +69,12 @@ class HomePage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0, // Home
+        currentIndex: 2,
         onTap: (index) {
-          if (index == 1) {
+          if (index == 0) {
+            Navigator.pushReplacementNamed(context, '/home');
+          } else if (index == 1) {
             Navigator.pushReplacementNamed(context, '/detail');
-          } else if (index == 2) {
-            Navigator.pushReplacementNamed(context, '/contact');
           }
         },
         items: const [

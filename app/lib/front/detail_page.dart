@@ -1,16 +1,15 @@
-
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class DetailPage extends StatelessWidget {
+  const DetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          // Header
-            Padding(
+          //Heaader
+          Padding(
               padding: const EdgeInsets.only(
                 top: 20,
                 left: 16,
@@ -42,16 +41,9 @@ class HomePage extends StatelessWidget {
           // Body
           Expanded(
             child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 16),
-                  const Text(
-                    'Chào mừng đến với ứng dụng quản lý thu chi của nhóm chúng tôi!',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+              child: Text(
+                'Chi tiết các khoản thu chi',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -71,10 +63,10 @@ class HomePage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0, // Home
+        currentIndex: 1,
         onTap: (index) {
-          if (index == 1) {
-            Navigator.pushReplacementNamed(context, '/detail');
+          if (index == 0) {
+            Navigator.pushReplacementNamed(context, '/home');
           } else if (index == 2) {
             Navigator.pushReplacementNamed(context, '/contact');
           }

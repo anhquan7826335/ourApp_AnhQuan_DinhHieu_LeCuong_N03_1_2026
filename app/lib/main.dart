@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'entity/user.dart';
-import 'controller/list_user.dart';
-import 'front/contact_page.dart';
+import 'front/about_page.dart';
+import 'front/detail_page.dart';
 import 'front/home_page.dart';
-import 'front/device_page.dart';
-import 'front/finance_page.dart';
-// Đối tượng và biến mô tả
+import '../entities/user.dart';
+import '../controller/list_user.dart';
 
 class Income {
   final int id;
@@ -103,7 +101,6 @@ class ExpenseCategory {
       );
 }
 
-// Generics class với 1 biến obj 
 class GenericPrinter<T> {
   final T obj;
   GenericPrinter(this.obj);
@@ -249,9 +246,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List<Widget> _pages = const [
     HomePage(),
-    FinancePage(),
-    ContactPage(),
-    DevicePage(),
+    DetailPage(),
+    AboutPage(),
   ];
 
   double get totalIncome => incomes.fold(0.0, (sum, income) => sum + income.amount);
@@ -271,33 +267,36 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: _onItemTapped,
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.account_balance_wallet_outlined),
-            selectedIcon: Icon(Icons.account_balance_wallet),
-            label: 'Thu Chi',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.contact_phone_outlined),
-            selectedIcon: Icon(Icons.contact_phone),
-            label: 'Contact',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.devices_outlined),
-            selectedIcon: Icon(Icons.devices),
-            label: 'Device',
-          ),
-        ],
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/home',
+      routes: {
+        '/home': (context) => const HomePage(),
+        '/detail': (context) => const DetailPage(),
+        '/contact': (context) => const AboutPage(),
+      },
+      home: Scaffold(
+        body: _pages[_selectedIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+            if (index == 0) {
+              Navigator.pushReplacementNamed(context, '/home');
+            } else if (index == 1) {
+              Navigator.pushReplacementNamed(context, '/detail');
+            } else if (index == 2) {
+              Navigator.pushReplacementNamed(context, '/contact');
+            }
+          },
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.info), label: 'Detail'),
+            BottomNavigationBarItem(icon: Icon(Icons.contacts), label: 'About'),
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,5 @@
 // Danh sách và CRUD cho User
-import '../entity/user.dart';
+import '../entities/user.dart';
 
 class UserList {
   final List<User> _items = [];
