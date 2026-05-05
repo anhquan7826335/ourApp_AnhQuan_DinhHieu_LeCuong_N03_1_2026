@@ -287,22 +287,7 @@ class _NavLink extends StatelessWidget {
 }
 
 
-class _AppLogoIcon extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    const c = Color(0xFF1A1A1A);
-    const r = Radius.circular(5);
-    const gap = 2.0;
-    const sz = 13.0;
-    return SizedBox(
-      width: 30,
-      height: 30,
-      child: CustomPaint(
-        painter: _GridLogoPainter(color: c, gap: gap, sz: sz, r: r),
-      ),
-    );
-  }
-}
+
 
 class _GridLogoPainter extends CustomPainter {
   final Color color;
