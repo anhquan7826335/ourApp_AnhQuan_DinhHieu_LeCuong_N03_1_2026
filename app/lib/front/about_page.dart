@@ -110,12 +110,12 @@ class _AboutPageState extends State<AboutPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 _FormField(
-                                  label: 'Name',
+                                  label: 'Tên',
                                   controller: _nameController,
                                 ),
                                 const SizedBox(height: 20),
                                 _FormField(
-                                  label: 'Surname',
+                                  label: 'Họ',
                                   controller: _surnameController,
                                 ),
                                 const SizedBox(height: 20),
@@ -126,7 +126,7 @@ class _AboutPageState extends State<AboutPage> {
                                 ),
                                 const SizedBox(height: 20),
                                 _FormField(
-                                  label: 'Message',
+                                  label: 'Tin nhắn phản hồi',
                                   controller: _messageController,
                                   maxLines: 4,
                                 ),
@@ -146,7 +146,7 @@ class _AboutPageState extends State<AboutPage> {
                                       ),
                                     ),
                                     child: const Text(
-                                      'Submit',
+                                      'Gửi phản hồi',
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
@@ -203,6 +203,7 @@ class _NavBar extends StatelessWidget {
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       _NavLink(label: 'Tính năng', active: false),
                       _NavLink(label: 'Giải pháp', active: false),
@@ -434,11 +435,11 @@ class _Footer extends StatelessWidget {
                 children: [
                   Image.asset(  
                     'assets/group_avatar.png',
-                    width: 40,
-                    height: 40,
+                    width: 80,
+                    height: 80,
                     fit: BoxFit.contain,
                     errorBuilder: (context, error, stackTrace) =>
-                        const FlutterLogo(size: 40),
+                        const FlutterLogo(size: 80),
                   ),
                   Row(
                     children: [
