@@ -18,8 +18,8 @@
 | Thành viên | Công việc |
 |----------|--------|
 | Lê Anh Quân | Xây dựng **Trang About** (giới thiệu app & nhóm) |
-| Nguyễn Đình Hiếu | Xây dựng **Trang Content** (danh sách thu/chi) |
-| Lê Mạnh Cường | Xây dựng **Trang Home** (tổng quan tài chính) |
+| Lê Mạnh Cường | Xây dựng **Trang Content** (danh sách thu/chi) |
+| Nguyễn Đình Hiếu | Xây dựng **Trang Home** (tổng quan tài chính) |
 
 ---
 
