@@ -48,11 +48,20 @@
 
 ---
 
-### ℹ️ About
-- Giới thiệu ứng dụng  
-- Thông tin nhóm phát triển  
-- Mục tiêu dự án  
-- Logo + mô tả  
+## ℹ️ About (Liên hệ & Hỗ trợ)
+
+Trang **About** trong ứng dụng được thiết kế theo hướng **hỗ trợ người dùng** trong quá trình sử dụng app quản lý thu chi cá nhân.
+
+### 📌 Nội dung chính
+- Giới thiệu ngắn gọn về ứng dụng  
+- Hướng dẫn sử dụng các chức năng cơ bản  
+- Cung cấp thông tin liên hệ hỗ trợ  
+
+
+### 💬 Phản hồi người dùng
+- Người dùng có thể gửi góp ý, báo lỗi hoặc đề xuất tính năng mới  
+- Hỗ trợ cải thiện trải nghiệm và nâng cấp ứng dụng trong tương lai  
+
 
 ---
 
