@@ -77,7 +77,7 @@ class _AboutPageState extends State<AboutPage> {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    '',
+                    'Chúng tôi rất mong nhận được phản hồi từ bạn!',
                     style: TextStyle(
                       fontSize: 18,
                       color: Color(0xFF555555),
@@ -286,7 +286,7 @@ class _NavLink extends StatelessWidget {
   }
 }
 
-// App logo – 4 rounded squares like the Figma icon in the screenshot
+
 class _AppLogoIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
