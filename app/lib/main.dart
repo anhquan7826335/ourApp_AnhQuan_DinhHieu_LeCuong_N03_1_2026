@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'front/about_page.dart';
-import 'front/detail_page.dart';
+import 'front/content_page.dart';
 import 'front/home_page.dart';
 import '../entities/user.dart';
 import '../controller/list_user.dart';
